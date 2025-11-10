@@ -1,0 +1,34 @@
+BEGIN
+
+1. IMPORT required libraries:
+   - requests (for fetching webpage)
+   - BeautifulSoup (for HTML parsing)
+   - nltk (for tokenization, stopwords, and stemming/lemmatization)
+
+2. FETCH webpage using requests.get(URL)
+
+3. PARSE HTML content using BeautifulSoup
+
+4. EXTRACT clean text:
+   - Find main content division (e.g., <div id='mw-content-text'>)
+   - Extract all <p> tags
+   - Concatenate their text content
+
+5. PREPROCESS the text:
+   a. Tokenize text into words (word_tokenize)
+   b. Convert all words to lowercase
+   c. Remove stopwords using NLTK’s stopword list
+   d. Apply stemming (Porter/Snowball) OR lemmatization (WordNet)
+
+6. COMPUTE Type–Token Ratio (TTR):
+   - unique_tokens = number of distinct words
+   - total_tokens = total number of words
+   - TTR = unique_tokens / total_tokens
+
+7. DISPLAY the TTR value
+
+8. REPEAT steps 5–7 for sample texts from:
+   - Brown corpus (different genres)
+   - Gutenberg corpus (different books)
+
+END

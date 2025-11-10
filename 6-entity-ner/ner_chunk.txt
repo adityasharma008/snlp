@@ -1,0 +1,39 @@
+BEGIN
+
+1. IMPORT libraries:
+   - nltk (tokenization, POS tagging, chunking, NER)
+   - re (for defining regex patterns)
+
+2. TOKENIZE and POS TAG sentences:
+   - sentence = "The little yellow dog barked at the cat"
+   - tokens = nltk.word_tokenize(sentence)
+   - pos_tags = nltk.pos_tag(tokens)
+
+3. DEFINE CHUNK GRAMMARS using regular expressions:
+   - NP: Noun Phrase  → {<DT>?<JJ>*<NN>}
+   - PP: Prepositional Phrase → {<IN><NP>}
+   - VP: Verb Phrase  → {<VB.*><NP|PP>+}
+   - CLAUSE: Sentence Part → {<NP><VP>}
+
+4. CREATE RegexpParser object:
+   - cp = nltk.RegexpParser(grammar)
+
+5. APPLY parser on POS-tagged sentence:
+   - result = cp.parse(pos_tags)
+   - print(chunk tree)
+
+6. PERFORM NAMED ENTITY RECOGNITION (NER):
+   - Use ne_chunk(pos_tags)
+   - Extract IOB tags (Inside–Outside–Beginning format) using tree2conlltags()
+
+7. PERFORM RELATION EXTRACTION:
+   - Load IEER corpus
+   - Define pattern (e.g., entities connected by “in” → ORG–LOC relation)
+     Example pattern: IN = re.compile(r'.*\bin\b(?!\b.+ing)')
+   - For each parsed IEER document:
+       Extract relations using extract_rels('ORG', 'LOC', doc, corpus='ieer', pattern=IN)
+       Print results in relational tuple form
+
+8. OPTIONAL: Plot or visualize chunk trees (cp.parse(sent_pos))
+
+END

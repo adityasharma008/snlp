@@ -1,0 +1,58 @@
+BEGIN
+
+1. IMPORT required libraries:
+   - TensorFlow / Keras (for neural network model)
+   - Numpy, pandas (for data handling)
+   - NLTK (for tokenization)
+   - sklearn (for evaluation and similarity functions)
+
+2. LOAD and PREPROCESS text corpus:
+   a. Read text file (e.g., alice.txt)
+   b. Remove short sentences and punctuation
+   c. Tokenize text using Keras Tokenizer
+   d. Convert tokens to integer IDs
+   e. Compute vocabulary size (V) and number of samples
+
+3. DEFINE hyperparameters:
+   - window_size = 2 (context window)
+   - embedding_dim = 32 (vector dimension)
+   - epochs = 3–5
+
+4. GENERATE TRAINING DATA:
+   (a) Skip-Gram:
+       For each word → predict each context word in window
+       X_skip = input (center word)
+       y_skip = output (context words one-hot encoded)
+   (b) CBOW:
+       For each word → use surrounding words to predict the center word
+
+5. BUILD Skip-Gram Model:
+   - Input → Embedding Layer (V x dim)
+   - Reshape output to 1D vector
+   - Dense(V, activation='softmax') → predict context word
+   - Compile with categorical_crossentropy loss
+   - Train on (X_skip, y_skip)
+
+6. BUILD CBOW Model (similarly):
+   - Input → context words
+   - Average context embeddings → predict center word
+   - Train on (X_cbow, y_cbow)
+
+7. EXTRACT WORD EMBEDDINGS:
+   - Get embedding matrix from model weights
+   - Save word vectors to file (word + embedding values)
+
+8. ANALOGY COMPUTATION:
+   - Embed(word) = one-hot(word) × embedding_matrix
+   - Analogy: word_b - word_a + word_c ≈ word_d
+   - Compute cosine similarity between predicted and actual vectors
+
+9. FIND NEAREST WORDS:
+   - Compute cosine distances between target embedding and all others
+   - Return top-N nearest words with similarity scores
+
+10. EVALUATE semantic relationships:
+    - Example: king : queen :: man : woman
+    - Verify if true word appears among top similar words
+
+END

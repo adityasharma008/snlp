@@ -1,0 +1,48 @@
+BEGIN
+
+1. IMPORT libraries:
+   - nltk (for datasets, tokenization, stopwords)
+   - sklearn (for model training and evaluation)
+   - pandas (for data handling)
+
+2. LOAD dataset:
+   - Use nltk.corpus.movie_reviews
+   - For each file, extract (review_text, label)
+   - Store as DataFrame with columns [review, label]
+
+3. PREPROCESS text:
+   a. Convert to lowercase
+   b. Tokenize using nltk.word_tokenize
+   c. Remove stopwords and non-alphabetic tokens
+   d. Join tokens back into cleaned string
+
+4. SPLIT dataset:
+   - train_test_split(cleaned_reviews, labels, test_size=0.2)
+
+5. FEATURE EXTRACTION:
+   - Apply CountVectorizer → Bag-of-Words features
+   - Apply TfidfVectorizer → TF-IDF features
+   - Transform training and test sets
+
+6. DEFINE models:
+   - Logistic Regression
+   - Multinomial Naive Bayes
+   - Linear Support Vector Machine (SVM)
+
+7. TRAIN & EVALUATE:
+   FOR each vectorizer (Count, TF-IDF):
+       FOR each model:
+           Train model on training data
+           Predict on test data
+           Compute Accuracy and F1-score
+           Store results
+
+8. MANUAL EVALUATION:
+   - Define a list of sample reviews
+   - For each trained model:
+       Preprocess review
+       Transform using the model’s vectorizer
+       Predict sentiment (pos/neg)
+       Print review and predicted label
+
+END

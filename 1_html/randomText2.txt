@@ -1,0 +1,37 @@
+BEGIN
+
+1. IMPORT libraries:
+   - nltk (for corpora, bigrams, CFD)
+   - random (for random word choice)
+
+2. LOAD dataset:
+   - Choose one text corpus: Brown (choose genre) OR Gutenberg (choose text)
+   - Extract words into a list (text)
+
+3. CREATE bigrams:
+   - Use nltk.bigrams(text) to form word pairs (word1, word2)
+
+4. BUILD Conditional Frequency Distribution (CFD):
+   - For each bigram (w1, w2):
+       - Count how often w2 follows w1
+   - Use ConditionalFreqDist(bigrams)
+
+5. DEFINE a function generate_random_text(cfdist, start_word, num_words, n):
+   - Initialize word = start_word
+   - Initialize output list with start_word
+   - REPEAT until num_words reached:
+       a. If word not in cfdist → STOP
+       b. Get n most frequent next words using cfdist[word].most_common(n)
+       c. Randomly select next_word = random.choice(list)
+       d. Append next_word to output
+       e. Update word = next_word
+   - Return joined text
+
+6. TEST function:
+   - For n = 3, 5, 10 → generate and print random text
+
+7. OBSERVE changes:
+   - Smaller n → more deterministic / repetitive text
+   - Larger n → more random / varied output
+
+END

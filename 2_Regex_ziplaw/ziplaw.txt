@@ -1,0 +1,35 @@
+BEGIN
+
+1. IMPORT required libraries:
+   - requests (for downloading text)
+   - re (for word extraction)
+   - collections.Counter (for frequency counting)
+   - numpy (for numerical arrays)
+   - matplotlib.pyplot (for plotting)
+
+2. FETCH a large text corpus:
+   - Example: Gutenberg text (e.g., Shakespeare’s works)
+   - Store text content in a variable
+
+3. PREPROCESS text:
+   - Convert to lowercase
+   - Extract words using regex (pattern: \b[a-z]+\b)
+   - Create a list of all word tokens
+
+4. COMPUTE word frequencies:
+   - Use Counter(words) to count occurrences
+   - Sort by frequency (most_common())
+
+5. PREPARE data for Zipf’s Law:
+   - ranks = [1, 2, 3, ..., N]
+   - frequencies = list of word counts in decreasing order
+
+6. PLOT log–log graph:
+   - X-axis → log(rank)
+   - Y-axis → log(frequency)
+   - Expect near-linear relationship (slope ≈ -1)
+
+7. DISPLAY plot and analyze:
+   - A straight line indicates Zipf’s Law holds true.
+
+END

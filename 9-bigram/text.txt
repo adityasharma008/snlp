@@ -1,0 +1,49 @@
+BEGIN
+
+1. IMPORT required libraries:
+   - nltk (for corpus, tokenization, ngrams)
+   - math, random (for calculations)
+   - collections (for Counters and default dictionaries)
+
+2. LOAD corpus:
+   - Use nltk.corpus.gutenberg (e.g., 'austen-emma.txt')
+   - Tokenize the text into words
+   - Convert all words to lowercase and remove punctuation
+   - Split tokens into training (80%) and test (20%) sets
+
+3. BUILD VOCABULARY:
+   - vocab = set of unique words in training data
+   - V = size of vocabulary
+
+4. DEFINE FUNCTION: train_model(tokens, n)
+   a. If n = 1 (unigram):
+        Count word frequencies → normalize probabilities
+   b. Else (bigram/trigram/etc.):
+        Generate n-grams and (n-1)-grams
+        For each n-gram:
+            Compute conditional probability with Laplace smoothing:
+            P(word | context) = (count(ngram) + 1) / (count(context) + V)
+        Store as nested dictionary: model[context][word] = probability
+
+5. DEFINE FUNCTION: generate_text(model, n, start_word, num_words)
+   a. Start with initial word or context
+   b. For each next word:
+        Sample next token from probability distribution of context
+        Append generated word to sequence
+   c. Return generated text
+
+6. DEFINE FUNCTION: calculate_perplexity(model, n, test_tokens)
+   a. For each n-gram in test data:
+        Retrieve model probability (or use default if unseen)
+        Accumulate log probabilities
+   b. Compute perplexity:
+        Perplexity = exp( - (1 / N) * Σ log(P(w_i | context)) )
+
+7. TRAIN AND EVALUATE FOR n = 1 TO 4:
+   a. Train n-gram model on training tokens
+   b. Generate a short sequence using generate_text()
+   c. Compute perplexity on test tokens
+   d. Display results
+
+END
+

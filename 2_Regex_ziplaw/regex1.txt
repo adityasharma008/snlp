@@ -1,0 +1,32 @@
+BEGIN
+
+1. IMPORT re (regular expression module)
+
+2. DEFINE regex patterns for each token category:
+   a. Abbreviations (e.g., U.S.A., Ph.D.)
+   b. Email IDs (e.g., abc@example.com)
+   c. IP Addresses (e.g., 192.168.0.1)
+   d. Hyphenated Words (e.g., mother-in-law)
+   e. Short Forms (e.g., Calif., Wash.)
+   f. Numbers / Dates / Amounts (e.g., $200, 12/08/2025, 3.14)
+   g. Phone Numbers (e.g., +91-9876543210, (123) 456-7890)
+   h. Regular Words (e.g., The, weather, site)
+   i. Punctuation (e.g., .,!?)
+
+3. COMBINE all regex patterns using OR (`|`) into one master pattern.
+
+4. COMPILE the combined pattern for efficiency.
+
+5. DEFINE a function custom_tokenizer(text):
+   a. Apply regex pattern to find all matches in input text.
+   b. Clean the result to remove empty groups.
+   c. Return the list of tokens.
+
+6. TAKE input text (sample paragraph or sentence).
+
+7. CALL custom_tokenizer(text) → tokens
+
+8. DISPLAY tokens
+   (Optionally annotate or label each token by its category)
+
+END

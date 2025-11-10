@@ -1,0 +1,46 @@
+BEGIN
+
+1. IMPORT libraries:
+   - nltk (for corpus and tagging)
+   - collections (for counting)
+   - math (for log probabilities)
+
+2. LOAD tagged corpus:
+   - Use Treebank corpus (tagset="universal")
+   - Split data into train (70%) and test (30%)
+
+3. COMPUTE required probability counts:
+   a. Initial counts → Count first tag of each sentence
+   b. Transition counts → Count tag_i → tag_{i+1} transitions
+   c. Emission counts → Count tag → word occurrences
+
+4. CALCULATE probabilities with smoothing:
+   - initial_probs[tag] = (initial_counts[tag] + 1) / (total_sents + num_tags)
+   - transition_probs[tag1][tag2] = (count(tag1→tag2) + 1) / (total_transitions_from_tag1 + num_tags)
+   - emission_probs[tag][word] = (count(tag→word) + 1) / (total_words_for_tag + vocab_size)
+
+5. DEFINE VITERBI algorithm:
+   INPUT: sentence, probabilities
+   a. Initialize matrix V[0][tag] = log(initial_prob * emission_prob)
+   b. For each word position t:
+       For each current tag:
+           Compute max probability path using previous tag probabilities and transitions
+   c. Backtrack to retrieve the best tag sequence
+
+6. EVALUATE model:
+   - Run Viterbi tagger on test sentences
+   - Compare predicted tags with gold-standard tags
+   - Compute accuracy = correct_tags / total_tags
+
+7. COMPARE with built-in NLTK taggers:
+   - DefaultTagger
+   - UnigramTagger
+   - BigramTagger
+   - NLTK’s HMMTagger
+   - Record their accuracies
+
+8. TEST on sample sentence:
+   - Input: ["the", "dog", "barks", "at", "the", "cat"]
+   - Output: predicted tags from custom HMM
+
+END
