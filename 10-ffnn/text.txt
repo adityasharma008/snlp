@@ -1,0 +1,51 @@
+BEGIN
+
+1. IMPORT libraries:
+   - tensorflow / keras (for neural model)
+   - nltk (for Brown corpus)
+   - numpy (for numerical operations)
+
+2. LOAD and PREPROCESS corpus:
+   - Load sentences from nltk.corpus.brown
+   - Join all sentences into a single text
+   - Tokenize text using Keras Tokenizer
+   - Build vocabulary (word_index)
+   - Convert words into integer sequences
+
+3. CREATE TRAINING SEQUENCES:
+   For each sentence:
+       Generate incremental sequences:
+           e.g., "the cat sat" → [the], [the cat], [the cat sat]
+       For each sequence:
+           Input = all words except last
+           Target = last word
+
+   Pad all input sequences to same length using pad_sequences()
+
+4. DEFINE MODEL ARCHITECTURE:
+   - Embedding(vocab_size, embedding_dim, input_length)
+   - Flatten() or GlobalAveragePooling1D()
+   - Dense(hidden_units, activation='relu')
+   - Dense(vocab_size, activation='softmax')   # Predict next word
+
+5. COMPILE MODEL:
+   - Loss: categorical_crossentropy
+   - Optimizer: Adam
+   - Metric: accuracy
+
+6. TRAIN MODEL:
+   - Fit on (X, y) for multiple epochs (e.g., 3)
+   - Use mini-batch training (batch_size=128)
+
+7. PREDICT NEXT WORD (optional function):
+   - Take input partial text
+   - Tokenize and pad
+   - Predict word probabilities
+   - Return most probable next word
+
+8. EVALUATE MODEL PERFORMANCE:
+   - Compute loss on test data
+   - Perplexity = exp(loss)
+   - Lower perplexity → better prediction quality
+
+END
